@@ -5,3 +5,25 @@
 2024-06-05T10:17:49.950Z [info] Retrieved all players
 2024-06-11T19:05:20.763Z [info] Retrieved all players
 2024-06-11T19:05:56.783Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"id","location":"body"},{"type":"field","msg":"Invalid value","path":"name","location":"body"},{"type":"field","msg":"Name is required","path":"name","location":"body"},{"type":"field","msg":"Invalid value","path":"team","location":"body"},{"type":"field","msg":"Team is required","path":"team","location":"body"}]
+2024-06-12T08:58:44.823Z [info] Retrieved all players
+2024-06-12T08:59:11.205Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"id","location":"body"},{"type":"field","msg":"Invalid value","path":"name","location":"body"},{"type":"field","msg":"Name is required","path":"name","location":"body"},{"type":"field","msg":"Invalid value","path":"team","location":"body"},{"type":"field","msg":"Team is required","path":"team","location":"body"}]
+2024-06-12T09:01:48.305Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"id","location":"body"},{"type":"field","msg":"Invalid value","path":"name","location":"body"},{"type":"field","msg":"Name is required","path":"name","location":"body"},{"type":"field","msg":"Invalid value","path":"team","location":"body"},{"type":"field","msg":"Team is required","path":"team","location":"body"}]
+2024-06-12T09:02:41.531Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"id","location":"body"},{"type":"field","msg":"Invalid value","path":"name","location":"body"},{"type":"field","msg":"Name is required","path":"name","location":"body"},{"type":"field","msg":"Invalid value","path":"team","location":"body"},{"type":"field","msg":"Team is required","path":"team","location":"body"}]
+2024-06-12T09:04:08.033Z [error] Validation failed: [{"type":"field","value":2,"msg":"Invalid value","path":"team_id","location":"body"}]
+2024-06-12T09:06:10.458Z [error] Validation failed: [{"type":"field","value":3,"msg":"Invalid value","path":"team_id","location":"body"}]
+2024-06-12T09:09:31.432Z [info] Player created: {"player_id":8,"player_name":"Player 7","team_id":3}
+2024-06-12T09:13:39.257Z [info] Retrieved all players
+2024-06-12T09:15:19.159Z [error] Player not found: ID 1
+2024-06-12T09:15:26.583Z [error] Player not found: ID 2
+2024-06-12T09:15:30.624Z [error] Player not found: ID 3
+2024-06-12T09:26:54.894Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"player_id","location":"params"}]
+2024-06-12T09:33:00.606Z [error] Player not found: ID 4
+2024-06-12T09:37:57.168Z [info] Player deleted: ID 4
+2024-06-12T10:17:58.967Z [info] Retrieved all players
+2024-06-12T10:18:43.216Z [info] Retrieved all players
+2024-06-12T10:19:01.823Z [info] Player deleted: ID 20
+2024-06-12T10:21:25.541Z [info] Retrieved all players
+2024-06-12T10:25:32.059Z [error] Error executing query: Error: Unknown column '$1' in 'field list'
+2024-06-12T10:26:10.456Z [error] Error executing query: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Nabi, 10)' at line 2
+2024-06-12T10:39:44.679Z [info] Retrieved all players
+2024-06-12T10:39:57.566Z [info] Player deleted: ID 18

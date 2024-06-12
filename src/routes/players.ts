@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { body, param, validationResult } from "express-validator";
-import { getAllPlayers, Player } from "../models/player";
+import { Player } from "../models/player";
 import playersLogger from "../loggers/playersLogger";
 import pool from "../db";
 
@@ -21,16 +21,27 @@ const validate = (req: Request, res: Response, next: Function) => {
 router.post(
   "/",
   [
-    body("id").isInt().withMessage("ID must be an integer"),
-    body("name").isString().notEmpty().withMessage("Name is required"),
-    body("team").isString().notEmpty().withMessage("Team is required"),
+    body("player_id").isInt().withMessage("ID must be an integer"),
+    body("player_name").isString().notEmpty().withMessage("Name is required"),
+    body("team_id").isInt().withMessage("Team ID must be an integer"),
   ],
   validate,
   (req: Request, res: Response) => {
-    const newPlayer: Player = req.body;
-    players.push(newPlayer);
-    playersLogger.info(`Player created: ${JSON.stringify(newPlayer)}`);
-    res.status(201).send(newPlayer);
+    const { player_id, player_name, team_id } = req.body;
+    const query = `
+      INSERT INTO players (player_id, player_name, team_id)
+      VALUES ('${player_id}', '${player_name}', '${team_id}')`;
+
+    pool.query(query, (error, results) => {
+      if (error) {
+        console.error("Error executing query:", error);
+        playersLogger.error(`Error executing query: ${error}`);
+        return res
+          .status(500)
+          .send("An error occurred while creating the player.");
+      }
+      res.status(201).send({ player_id, player_name, team_id });
+    });
   }
 );
 
@@ -49,7 +60,6 @@ router.get("/", async (req: Request, res: Response) => {
         return;
       }
       res.send(results);
-
     });
   });
 });
@@ -60,55 +70,65 @@ router.get(
   [param("id").isInt().withMessage("ID must be an integer")],
   validate,
   (req: Request, res: Response) => {
-    const player = players.find((p) => p.player_id === parseInt(req.params.id));
-    if (player) {
-      playersLogger.info(`Player retrieved: ${JSON.stringify(player)}`);
-      res.send(player);
-    } else {
-      playersLogger.error(`Player not found: ID ${req.params.id}`);
-      res.status(404).send("Player not found");
-    }
+    const player_id = parseInt(req.params.id);
+    const query = `SELECT * FROM players WHERE player_id = ${player_id}`;
+    pool.query(query, (error, results) => {
+      if (error) {
+        console.error("Error executing query:", error);
+        return;
+      }
+      res.send(results);
+    });
   }
 );
 
 // Update a player by ID
+
 router.put(
   "/:id",
   [
     param("id").isInt().withMessage("ID must be an integer"),
-    body("id").isInt().withMessage("ID must be an integer"),
-    body("name").isString().notEmpty().withMessage("Name is required"),
-    body("team").isString().notEmpty().withMessage("Team is required"),
+    body("player_id").isInt().withMessage("ID must be an integer"),
+    body("player_name").isString().notEmpty().withMessage("Name is required"),
+    body("team_id").isInt().withMessage("Team ID must be an integer"),
   ],
   validate,
   (req: Request, res: Response) => {
-    const index = players.findIndex((p) => p.player_id === parseInt(req.params.id));
-    if (index !== -1) {
-      players[index] = req.body;
-      playersLogger.info(`Player updated: ${JSON.stringify(players[index])}`);
-      res.send(players[index]);
-    } else {
-      playersLogger.error(`Player not found: ID ${req.params.id}`);
-      res.status(404).send("Player not found");
-    }
+    const id = parseInt(req.params.id);
+    const { player_id, player_name, team_id } = req.body;
+    const query = `UPDATE players SET player_name='${player_name}', player_id='${player_id}', team_id='${team_id}' WHERE player_id = ${id}`;
+    pool.query(query, (error, results) => {
+      if (error) {
+        console.error("Error executing query:", error);
+        res.status(500).send("An error occurred while updating the player.");
+        return;
+      }
+      res.send("Player updated successfully.");
+    });
   }
 );
-
 // Delete a player by ID
 router.delete(
   "/:id",
   [param("id").isInt().withMessage("ID must be an integer")],
   validate,
   (req: Request, res: Response) => {
-    const index = players.findIndex((p) => p.player_id === parseInt(req.params.id));
-    if (index !== -1) {
-      const deletedPlayer = players.splice(index, 1);
-      playersLogger.info(`Player deleted: ${JSON.stringify(deletedPlayer[0])}`);
-      res.send(deletedPlayer[0]);
-    } else {
-      playersLogger.error(`Player not found: ID ${req.params.id}`);
-      res.status(404).send("Player not found");
-    }
+    const id = parseInt(req.params.id);
+    const query = `DELETE FROM players WHERE player_id = ${id}`;
+    pool.query(query, (error, results: any) => {
+      if (error) {
+        console.error("Error executing query:", error);
+        res.status(500).send("An error occurred while deleting the player.");
+        return;
+      }
+      if (results.affectedRows === 0) {
+        playersLogger.error(`Player not found: ID ${id}`);
+        res.status(404).send("Player not found");
+      } else {
+        playersLogger.info(`Player deleted: ID ${id}`);
+        res.send(`Player with ID ${id} deleted successfully.`);
+      }
+    });
   }
 );
 

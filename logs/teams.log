@@ -1,1 +1,17 @@
 2024-06-11T19:07:50.705Z [info] Retrieved all teams
+2024-06-12T09:55:14.134Z [info] Retrieved all teams
+2024-06-12T10:00:36.181Z [info] Retrieved all Teams
+2024-06-12T10:09:41.591Z [error] Team not found: ID 3
+2024-06-12T10:11:38.322Z [info] Team deleted: ID 3
+2024-06-12T10:14:18.913Z [info] Retrieved all Teams
+2024-06-12T10:14:26.799Z [info] Retrieved all Teams
+2024-06-12T10:14:58.691Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"id","location":"body"},{"type":"field","msg":"Invalid value","path":"name","location":"body"},{"type":"field","msg":"Name is required","path":"name","location":"body"},{"type":"field","msg":"Invalid value","path":"city","location":"body"},{"type":"field","msg":"City is required","path":"city","location":"body"}]
+2024-06-12T10:30:04.819Z [info] Retrieved all Teams
+2024-06-12T10:31:54.357Z [info] Retrieved all Teams
+2024-06-12T10:35:00.709Z [info] Retrieved all Teams
+2024-06-12T10:36:02.252Z [info] Team deleted: ID 11
+2024-06-12T10:37:14.787Z [error] Team not found: ID 11
+2024-06-12T10:37:22.297Z [info] Retrieved all Teams
+2024-06-12T10:37:31.507Z [info] Team deleted: ID 10
+2024-06-12T10:37:45.955Z [info] Retrieved all Teams
+2024-06-12T10:38:05.180Z [error] Error executing query: Error: Duplicate entry '1' for key 'PRIMARY'
