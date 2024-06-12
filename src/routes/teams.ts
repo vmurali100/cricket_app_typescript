@@ -46,7 +46,7 @@ router.get(
   [param("id").isInt().withMessage("ID must be an integer")],
   validate,
   (req: Request, res: Response) => {
-    const team = teams.find((t) => t.id === parseInt(req.params.id));
+    const team = teams.find((t) => t.team_id === parseInt(req.params.id));
     if (team) {
       teamsLogger.info(`Team retrieved: ${JSON.stringify(team)}`);
       res.send(team);
@@ -68,7 +68,7 @@ router.put(
   ],
   validate,
   (req: Request, res: Response) => {
-    const index = teams.findIndex((t) => t.id === parseInt(req.params.id));
+    const index = teams.findIndex((t) => t.team_id === parseInt(req.params.id));
     if (index !== -1) {
       teams[index] = req.body;
       teamsLogger.info(`Team updated: ${JSON.stringify(teams[index])}`);
@@ -86,7 +86,7 @@ router.delete(
   [param("id").isInt().withMessage("ID must be an integer")],
   validate,
   (req: Request, res: Response) => {
-    const index = teams.findIndex((t) => t.id === parseInt(req.params.id));
+    const index = teams.findIndex((t) => t.team_id === parseInt(req.params.id));
     if (index !== -1) {
       const deletedTeam = teams.splice(index, 1);
       teamsLogger.info(`Team deleted: ${JSON.stringify(deletedTeam[0])}`);

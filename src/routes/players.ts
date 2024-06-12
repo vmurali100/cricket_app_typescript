@@ -60,7 +60,7 @@ router.get(
   [param("id").isInt().withMessage("ID must be an integer")],
   validate,
   (req: Request, res: Response) => {
-    const player = players.find((p) => p.id === parseInt(req.params.id));
+    const player = players.find((p) => p.player_id === parseInt(req.params.id));
     if (player) {
       playersLogger.info(`Player retrieved: ${JSON.stringify(player)}`);
       res.send(player);
@@ -82,7 +82,7 @@ router.put(
   ],
   validate,
   (req: Request, res: Response) => {
-    const index = players.findIndex((p) => p.id === parseInt(req.params.id));
+    const index = players.findIndex((p) => p.player_id === parseInt(req.params.id));
     if (index !== -1) {
       players[index] = req.body;
       playersLogger.info(`Player updated: ${JSON.stringify(players[index])}`);
@@ -100,7 +100,7 @@ router.delete(
   [param("id").isInt().withMessage("ID must be an integer")],
   validate,
   (req: Request, res: Response) => {
-    const index = players.findIndex((p) => p.id === parseInt(req.params.id));
+    const index = players.findIndex((p) => p.player_id === parseInt(req.params.id));
     if (index !== -1) {
       const deletedPlayer = players.splice(index, 1);
       playersLogger.info(`Player deleted: ${JSON.stringify(deletedPlayer[0])}`);

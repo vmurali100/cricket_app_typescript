@@ -1,5 +1,4 @@
 export interface Team {
-    id: number;
-    name: string;
-    city: string;
+    team_id: number;
+    team_name: string;
 }

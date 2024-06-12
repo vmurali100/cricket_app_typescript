@@ -2,3 +2,6 @@
 2024-06-05T09:47:56.261Z [info] Retrieved all players
 2024-06-05T09:55:10.491Z [info] Retrieved all players
 2024-06-05T09:56:18.057Z [info] Retrieved all players
+2024-06-05T10:17:49.950Z [info] Retrieved all players
+2024-06-11T19:05:20.763Z [info] Retrieved all players
+2024-06-11T19:05:56.783Z [error] Validation failed: [{"type":"field","msg":"ID must be an integer","path":"id","location":"body"},{"type":"field","msg":"Invalid value","path":"name","location":"body"},{"type":"field","msg":"Name is required","path":"name","location":"body"},{"type":"field","msg":"Invalid value","path":"team","location":"body"},{"type":"field","msg":"Team is required","path":"team","location":"body"}]
